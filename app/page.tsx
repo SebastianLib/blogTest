@@ -4,7 +4,7 @@ import { client, urlFor } from "./lib/sanity";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getData() {
   const query = `
@@ -15,12 +15,13 @@ async function getData() {
       titleImage
   }`;
 
-  const data = await client.fetch(query, { next: { revalidate: 10 } })
+  const data = await client.fetch(query,{},{ next: { revalidate: 30 } })
 
   return data;
 }
 
 export default async function Home() {
+  noStore()
   const data: simpleBlogCard[] = await getData();
 
   return (
