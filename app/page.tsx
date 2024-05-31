@@ -15,7 +15,7 @@ async function getData() {
       titleImage
   }`;
 
-  const data = await client.fetch(query, { cache: 'no-store' });
+  const data = await client.fetch(query, { next: { revalidate: 10 } })
 
   return data;
 }
