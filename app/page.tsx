@@ -4,7 +4,6 @@ import { client, urlFor } from "./lib/sanity";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { unstable_noStore as noStore } from "next/cache";
 
 async function getData() {
   const query = `
@@ -21,7 +20,6 @@ async function getData() {
 }
 
 export default async function Home() {
-  noStore()
   const data: simpleBlogCard[] = await getData();
 
   return (
